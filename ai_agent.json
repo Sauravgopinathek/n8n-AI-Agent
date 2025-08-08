@@ -1,0 +1,139 @@
+{
+  "name": "ai-agent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -360,
+        0
+      ],
+      "id": "d6420ed7-68b5-4551-b304-350776993754",
+      "name": "When chat message received",
+      "webhookId": "bec1dcc6-969a-4e97-870b-cb3493488183"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -140,
+        0
+      ],
+      "id": "2c808f9c-8418-4707-93c5-31cc683b7f34",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        240
+      ],
+      "id": "059d1359-04f4-41a8-95dc-e0d9df333888",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [
+        120,
+        220
+      ],
+      "id": "52dde896-02c2-42f2-bac2-550806c8c90e",
+      "name": "SerpAPI",
+      "credentials": {
+        "serpApi": {
+          "id": "pDrcqKPxX7msaioo",
+          "name": "SerpAPI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -140,
+        180
+      ],
+      "id": "1f260e56-3c00-46cf-bd9e-15a7e040cfc2",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "pdfk4PiKtVoO7ORB",
+          "name": "OpenRouter account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpAPI": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "42efebb0-bd01-44cc-b13e-1920217256ec",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6d114016a2f345ee1c5600478a6bee1aa78c6846e86a8cb32bdb862204b052e2"
+  },
+  "id": "O5hwWvs8bhzH5GFI",
+  "tags": []
+}
